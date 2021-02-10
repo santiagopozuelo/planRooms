@@ -8,16 +8,16 @@ import Foundation
 
 import Firebase
 
-struct Chatroom: Codable, Identifiable {
+struct Plan: Codable, Identifiable {
     var id: String
     var title: String
     var joinCode: Int
     
 }
 
-class ChatroomsViewModel: ObservableObject {
+class FeedViewModel: ObservableObject {
     
-    @Published var chatrooms = [Chatroom]()
+    @Published var plans = [Plan]()
     private let db = Firestore.firestore()
     private let user = Auth.auth().currentUser
     
@@ -33,13 +33,13 @@ class ChatroomsViewModel: ObservableObject {
                     return
                 }
                 
-                self.chatrooms = documents.map({docSnapshot -> Chatroom in
+                self.plans = documents.map({docSnapshot -> Plan in
                     let data = docSnapshot.data()
                     let docId = docSnapshot.documentID
                     let title = data["title"] as? String ?? ""
                     let joinCode = data["joinCode"] as? Int ?? -1
                     
-                    return Chatroom(id: docId, title: title, joinCode: joinCode)
+                    return Plan(id: docId, title: title, joinCode: joinCode)
                     
                     
                 })
@@ -48,7 +48,7 @@ class ChatroomsViewModel: ObservableObject {
         }
     }
     
-    func createChatroom(title: String, handler: @escaping() -> Void) {
+    func createPlan(title: String, handler: @escaping() -> Void) {
         if (user != nil) {
             db.collection("plans").addDocument(data: [
                                                     "title": title,
@@ -64,7 +64,7 @@ class ChatroomsViewModel: ObservableObject {
         }
     }
     
-    func joinChatroom(code: String, handler: @escaping()-> Void) {
+    func joinPlan(code: String, handler: @escaping()-> Void) {
         if (user != nil) {
             db.collection("plans").whereField("joinCode", isEqualTo: Int(code)).getDocuments() {
                 (snapshot, error) in

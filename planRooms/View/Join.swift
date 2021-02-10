@@ -12,7 +12,7 @@ struct Join: View {
     
     @State var joinCode = ""
     @State var newTitle = ""
-    @ObservedObject var viewModel = ChatroomsViewModel()
+    @ObservedObject var viewModel = FeedViewModel()
     
     
     var body: some View {
@@ -22,7 +22,7 @@ struct Join: View {
                     Text("join chateroom").font(.title)
                     TextField("eneter join code", text: $joinCode)
                     Button(action: {
-                        viewModel.joinChatroom(code: joinCode, handler: {
+                        viewModel.joinPlan(code: joinCode, handler: {
                             self.isOpen = false
                         })
                     }, label: {
@@ -34,7 +34,7 @@ struct Join: View {
                     Text("Create chateroom").font(.title)
                     TextField("eneter a new title", text: $newTitle)
                     Button(action: {
-                        viewModel.createChatroom(title: newTitle, handler: {
+                        viewModel.createPlan(title: newTitle, handler: {
                             self.isOpen = false
                         })
                     }, label: {

@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct ChatList: View {
-    @ObservedObject var viewModel = ChatroomsViewModel()
+struct Feed: View {
+    @ObservedObject var viewModel = FeedViewModel()
     @State var joinModal = false
     
     init() {
@@ -17,10 +17,10 @@ struct ChatList: View {
     
     var body: some View {
         NavigationView {
-            List(viewModel.chatrooms) { chatroom in
-                NavigationLink(destination: Messages(chatroom: chatroom)){
+            List(viewModel.plans) { plan in
+                NavigationLink(destination: Messages(plan: plan)){
                     HStack(alignment: .top) {
-                        Text(chatroom.title)
+                        Text(plan.title)
                         Spacer()
                     }
                 }
@@ -43,6 +43,6 @@ struct ChatList: View {
 
 struct ChatList_Previews: PreviewProvider {
     static var previews: some View {
-        ChatList()
+        Feed()
     }
 }

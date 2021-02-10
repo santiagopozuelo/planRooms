@@ -10,13 +10,13 @@ import SwiftUI
 
 struct Messages: View {
     
-    let chatroom: Chatroom
-    @ObservedObject var viewModel = MessagesViewModel()
+    let plan: Plan
+    @ObservedObject var viewModel = PlanViewModel()
     @State var messageField = ""
     
-    init(chatroom: Chatroom) {
-        self.chatroom = chatroom
-        viewModel.fetchData(docId: chatroom.id)
+    init(plan: Plan) {
+        self.plan = plan
+        viewModel.fetchData(docId: plan.id)
     }
     
     var body: some View {
@@ -31,7 +31,7 @@ struct Messages: View {
             HStack {
                 TextField("enter messaage...", text: $messageField).textFieldStyle(RoundedBorderTextFieldStyle())
                 Button(action: {
-                    viewModel.sendMessage(messageContent: messageField, docId: chatroom.id)
+                    viewModel.sendMessage(messageContent: messageField, docId: plan.id)
                 }, label: {
                     Text("send")
                     
@@ -39,12 +39,12 @@ struct Messages: View {
             }
         }
 
-            .navigationBarTitle(chatroom.title)
+            .navigationBarTitle(plan.title)
     }
 }
 
 struct Messages_Previews: PreviewProvider {
     static var previews: some View {
-        Messages(chatroom: Chatroom(id: "10101",title: "Hello", joinCode: 10))
+        Messages(plan: Plan(id: "10101",title: "Hello", joinCode: 10))
     }
 }

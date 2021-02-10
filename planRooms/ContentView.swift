@@ -18,7 +18,7 @@ struct ContentView: View {
     }
     
     var body: some View {
-        ChatList()
+        Feed()
             .fullScreenCover(isPresented: $sessionStore.isAnon, content: {
                 Login()
             })

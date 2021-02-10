@@ -16,7 +16,7 @@ struct Message: Codable, Identifiable {
 }
 
 
-class MessagesViewModel: ObservableObject {
+class PlanViewModel: ObservableObject {
     
     @Published var messages = [Message]()
     private let db = Firestore.firestore()
