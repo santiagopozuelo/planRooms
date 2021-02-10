@@ -1,0 +1,6 @@
+framework module Pods_planRooms {
+  umbrella header "Pods-planRooms-umbrella.h"
+
+  export *
+  module * { export * }
+}
